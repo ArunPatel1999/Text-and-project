@@ -1,0 +1,9 @@
+
+Genrate Certificate /config/cart/=> keytool -import -file http_ca.crt -keystore truststore.p12 -storepass password -noprompt -storetype pkcs12
+
+create new user => elasticsearch-users useradd arunpatel -p arunpatel -r superuser                                                           
+Genrate new token => elasticsearch-create-enrollment-token --scope kibana
+
+ 
+
+

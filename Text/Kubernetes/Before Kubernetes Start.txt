@@ -1,0 +1,30 @@
+swapoff -a
+nano /etc/fstab   ===> Disbale Swap off Before Run kubernates
+==============================================================
+
+if init time get this error  ==> CRI v1 runtime API is not implemented for endpoint \"unix:///var/run/containerd/containerd.sock\":
+resone container is old
+
+-----------Try FIrst------------------
+	apt remove containerd
+	apt update 
+	apt install containerd.io
+	rm /etc/containerd/config.toml   
+	systemctl restart containerd
+---------If not fix then try second----------
+	nano /etc/containerd/config.toml
+		----Add Line--------
+		[plugins."io.containerd.grpc.v1.cri".containerd]
+		endpoint = "unix:///var/run/containerd/containerd.sock" 
+		-------------------
+
+	mv /etc/containerd/config.toml /root/config.toml.bak
+	systemctl restart containerd
+
+=======================================================
+
+
+
+ -- Kubernetes Playground
+ -- Play with K8s
+ -- Play with Kubernetes Classroom

@@ -1,0 +1,21 @@
+acks behavieor
+-1	all
+0	none(fire-forget)
+1	leader
+
+
+min.insync.replicas=1  ===> means data is present atlest on replica
+
+enable.idempotence = true ==> when producer failde before getting acknowldgement then resend data in kafka but kafka not save that data and just reture old response
+in older verison it is disable
+
+
+compression.type = none
+none
+gzip  ==> good for size, but take more cpu
+snappy  ==> good for cpu, but take more size
+lz4
+
+
+partison is for scaling and replicas for avalibitiy
+  

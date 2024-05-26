@@ -1,0 +1,6 @@
+FROM openjdk
+WORDIR /usr/src/myapp
+COPY . /usr/src/myapp/
+CMD ["java", "-jar", "**.jar"]
+EXPOSE 9090
+HEALTHCHECK --interval-5s --timeout=3s CMD curl -f http://localhost:500 || nc -zv localhost 5000 || exit 1

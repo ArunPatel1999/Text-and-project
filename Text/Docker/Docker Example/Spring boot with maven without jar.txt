@@ -1,0 +1,9 @@
+FROM maven:3.8.5-eclipse-temurin-17-alpine AS build
+COPY . .
+RUN mvn clean package -Pprod -DskipTests
+
+FROM eclipse-temurin:17-jdk-alpine
+COPY --from=build /target/SwipeMe-1.0.jar swipeme.jar
+# ENV PORT=8080
+EXPOSE 8080
+ENTRYPOINT ["java","-jar","swipeme.jar"]

@@ -1,0 +1,57 @@
+docker build -t image_name -f filename .
+
+=================================
+
+docker run --name mysql -v c:/docker_data/mysql:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=system -d --restart unless-stopped -p 3306:3306 mysql 
+
+docker run --name redis -v c:/docker_data/redis:/data -d --restart unless-stopped -p 6379:6379 redis 
+
+docker run --name postgres -v c:/docker_data/postgres:/var/lib/postgresql/data  -e POSTGRES_PASSWORD=system -d -p 5432:5432 postgres
+
+docker run --name mongo -v c:/docker_data/mongodb:/data/db -d -p 27017:27017 mongo
+
+docker run --name rethinkdb -itd -p 8080:8080 -p 28015:28015 -p 29015:29015 -v c:/docker_data/rethinkdb:/data rethinkdb  ==> rethinkdb
+
+docker run --name nginx -v :/usr/share/nginx/html -itd -p 80:80 nginx
+
+docker run --name sonarqube -itd -v c:/docker_data/sonarqube:/opt/sonarqube/data  -p 9000:9000 sonarqube 
+
+=====================================
+
+docker run -p 3000:300 -v /app/node_module -v $(pwd):/app image   ====> -v /app/node_module map container volume to container
+
+//======MYSQL OR PROSTGRAHE==============
+docker pull mysql
+MYSQL => docker run --name mysql -e MYSQL_ROOT_PASSWORD=system -d -p 3306:3306 mysql
+POST => docker run --name postgres -e POSTGRES_PASSWORD=system -d -p 5432:5432 postgres
+docker exec -it mysqlDB bash
+mysql -p
+psql -> no idea
+mysql -u user -p
+psql -U user -W database
+
+https://www.docker.com/blog/9-tips-for-containerizing-your-spring-boot-code/
+
+
+--------jenkins------
+
+docker run --name jenkins -v c:/docker_data/jenkins:/var/jenkins_home -d -p 5000:8080 jenkins/jenkins:lts-jdk11  ==> run junkines
+
+
+docker run --name jenkins-d -p 8080:8080 -p 5000:5000  --group-add 0 -v c:/docker_data/jenkins:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock jenkins 
+
+docker exec -u 0 -it contanierId /bin/bash
+
+usermod -aG docker jenkins
+usermod -aG root jenkins
+chmod 664 /var/run/docker.sock
+But none of them work for me, I tried:
+
+chmod 777 /var/run/docker.sock
+
+
+
+
+
+
+

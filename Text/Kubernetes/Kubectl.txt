@@ -1,0 +1,69 @@
+kubectl get pods --all-namespaces ==> check all serveries are run
+
+kubectl cluster-info
+
+kubectl get nodes  ===> Get All Pods
+
+kubectl run nginx --image=nginx  ===> run nginx
+
+kubectl get pods  ==> get Pods
+
+kubectl get pods -o wide  ==> get Pods more detail like ip and where pods is running
+
+kubectl get services   ===> get the services
+
+kubectl describe pods  ===> describe all pods
+
+kubectl describe pod pod-name  ===> get only one pod description
+
+kubectl delete {pod, replicaset, ... } nginx   ===> delete nginx
+
+kubectl create -f yml-file-name.yml  ===> run yml
+
+kubectl create -f .
+
+kubectl create -f yml-file-name.yml --record   ===> run yml and record history help for rollback and deplyment
+
+
+kubectl replace -f yml-file-name.yml  ===> replace yml
+
+kubectl get replicationcontroller    ===> Get replication of  pods
+
+kubectl get replicaset    ===> Get replication set of pods
+
+kubectl scale --replicas=6 -f yml-file-name.yml   ===> update replicas
+
+kubectl scale --replicas=6 replicaset myapp-replicaset 
+
+----------------------------------------------------------
+
+kubectl get deployments   ===> get all deployments
+
+kubectl get all    		  ===> Get All pods, replicaset and deplyment in single command
+
+kubectl describe deployment
+
+kubectl rollout status deployment/myapp-deployment   ===> Get Status of  deployment
+
+kubectl rollout history deployment/myapp-deployment   ===> Get the history of deployment like when app is deployment and whene upgrade
+
+kubectl apply -f yml-file.yml --record  ==> update pods
+
+kubectl set image deployment/myapp-deployment nginx-container=nginx:1.9.1    ==> dereact update image without change in file
+
+kubectl rollout undo deployment/myapp-deployment   ===> rollback prives version if any error accured
+
+kubectl get services 
+
+kubectl annotate deployment myapp-deployment kubernetes.io/change-cause="version change to 1.16.0 to latest" --overwrite=true   ==> --record is depricated show use this and write you history
+
+
+
+
+
+
+kubectl create deployment myapp --image=k8-app-img:1 --port=8080
+
+kubectl expose deployment myapp --type=NodePort   
+
+kubectl expose deployment myapp --type=LoadBalancer --port=8080  ==> create service

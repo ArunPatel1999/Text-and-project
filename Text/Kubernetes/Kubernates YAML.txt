@@ -1,0 +1,51 @@
+kubectl create -f yml-file-name.yml  ===> run yml
+
+==================================================
+
+Kind		||		Version
+---------------------------
+POD					v1
+Service				v1
+ReplicaSet			apps/v1
+Deployment			apps/v1
+
+
+Deployment -> ReplicaSet -> POD   ===> Strucher
+
+--------------replication controller  ANd replicaset----------------------------
+
+replication controller is old don't use it use replicaset
+replica use replication
+
+=> replica set continue watch any pod is down or not if down then up help of selector because many pods are runing but which app is need to monitor that is mention in this selector.
+=> it is optional in replication controller but not in replication set
+
+----------------deployment-----------------
+deployment startge 
+	 Recreate => Delete All pods and up all new pods (DownTime )
+	 Rolling Update => Delete and up One by one  (NO DownTime , Defult startage)
+
+
+how to do that just change you .yml and run command
+kubectl apply -f yml-file.yml   
+kubectl apply -f image deployment/myapp-deployment nginx-container=nginx:1.9.1    ==> dereact update image without change in file	 
+
+spec:
+  replicas: 3
+  strategy:
+    type: Recreate/RollingUpdate
+	
+------------------------------------
+Service Type --> NodePort, ClusterIP, LoadBalancer
+
+NodePort range -> 30000 - 32767
+
+ClusterIP are used to coummincate pods to each other (Default)
+
+Load Balancing only work public and private cloud like aws, google clod
+
+ExternalName is for domain name
+
+Voting app link 
+https://github.com/mmumshad/kubernetes-example-voting-app.git
+https://github.com/mmumshad/example-voting-app-kubernetes-v2.git

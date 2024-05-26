@@ -1,0 +1,6 @@
+
+
+
+
+log.retention.hours =168   ===> kafak hold data 7 day
+log.retention.bytes        ===> Controller by size

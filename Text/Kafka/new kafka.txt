@@ -1,0 +1,57 @@
+-------------Topic-------------
+
+kafka-topics.sh --bootstrap-server localhost:9092 --topic hello-world --create
+
+kafka-topics.sh --bootstrap-server localhost:9092 --list
+
+kafka-topics.sh --bootstrap-server localhost:9092 --topic hello-world --describe
+
+kafka-topics.sh --bootstrap-server localhost:9092 --topic hello-world --delete
+
+kafka-topics.sh --bootstrap-server localhost:9092 --topic hello-world --alter --partitions 4 ===> Update Sacaling partitions | if sacling it chance to duplication 
+
+
+--partitions 2 ==> create partitions
+--replication-factor 3  ===> duplicate data for high avalibilty 
+
+--------------producer--------------------
+
+kafka-console-producer.sh --bootstrap-server localhost:9092 --topic hello-world
+
+--timeout 50   ==> no delay above do batch procecing
+
+--property key.separator=: --property parse.key=true  ===> push data with key value paise 1:test
+
+--------------consumer--------------------
+
+kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic hello-world
+
+--from-beginning                    ===> read data from beginning
+--property print.offset=true        ===> print offset (offset like order number)
+--property print.timestamp=true     ===> Print message recive time
+--group  my_group                   ===> not conume same data in group
+--property print.key=true           ===> Print the Key 
+--describe
+--isolation-level=read_committed    ===> read only committed data
+
+--------------consumer group--------------------
+
+kafka-consumer-group.sh --bootstrap-server localhost:9092 --list   ===> get Group
+    
+
+kafka-consumer-group.sh --bootstrap-server localhost:9092 --group group_1  
+
+    --describe  ==> get infomation about group
+
+----IT is used skip the message and re consume message again ------------
+----before run you need to kill all group consume-----------------------
+
+    --reset-offset
+            --shift-by +-5          ===>  5 Message
+            --by-duration PT5M      ===>  5 Min
+            --to-datetime 2023-01-01T00:00:00   ===> datetime
+            --to-earliest                       ===> from starting
+            --to-latest                         ===> latest message
+        --dry-run\--execute         
+
+

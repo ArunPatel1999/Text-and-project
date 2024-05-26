@@ -1,0 +1,18 @@
+minikube version
+
+minikube start --driver=docker
+
+minikube status
+
+minikube stop --all
+
+minikube docker-env ===> get primssion to minikube access local docker image 
+	and copy last command and past
+
+
+kinikube dashboard
+
+minikube service service-name --url  ==> get url of service
+
+
+minikube ssh ===> inside minikube

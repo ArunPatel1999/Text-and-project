@@ -1,0 +1,5 @@
+FROM openjdk
+WORKDIR /java/src
+COPY . /java/src
+RUN javac Test.java
+CMD ["java", "Test"]

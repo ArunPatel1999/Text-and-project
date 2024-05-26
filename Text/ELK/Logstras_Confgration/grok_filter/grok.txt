@@ -1,0 +1,121 @@
+https://grokdebugger.com/
+
+other grok example => http://media.sundog-soft.com/es/grok.txt / github:-> coralogix-resources
+
+
+
+========query=====================
+{
+  "size": 1, 
+  "track_total_hits": true,
+  "query": {
+    "bool": {
+      "must_not": [
+        {
+          "term": {
+            "tags.keyword": "_grokparsefailure"
+          }
+        }
+      ]
+    }
+  }
+}
+
+==============Nginx=====================
+
+input => 73.44.199.53 - - [01/Jun/2020:15:49:10 +0000] "GET /blog/join-in-mongodb/?relatedposts=1 HTTP/1.1" 200 131 "https://www.techstuds.com/blog/join-in-mongodb/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.61 Safari/537.36"
+pattern => "%{IPORHOST:remote_ip} - %{DATA:user_name} \[%{HTTPDATE:access_time}\] \"%{WORD:http_method} %{DATA:url} HTTP/%{NUMBER:http_version}\" %{NUMBER:response_code} %{NUMBER:body_sent_bytes} \"%{DATA:referrer}\" \"%{DATA:agent}\""
+output => 
+            {
+                "remote_ip": "73.44.199.53",
+                "user_name": "-",
+                "access_time": "01/Jun/2020:15:49:10 +0000",
+                "http_method": "GET",
+                "url": "/blog/join-in-mongodb/?relatedposts=1",
+                "http_version": 1.1,
+                "response_code": 200,
+                "body_sent_bytes": 131,
+                "referrer": "https://www.techstuds.com/blog/join-in-mongodb/",
+                "agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.61 Safari/537.36"
+            }
+
+======================IIS=================================
+
+input => 2017-11-18 08:48:20 GET /de adpar=12345&gclid=1234567890 443 - 149.172.138.41 HTTP/2.0 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/62.0.3202.89+Safari/537.36+OPR/49.0.2725.39 - https://www.google.de/ www.site-logfile-explorer.com 301 0 0 624 543 46
+patten => "%{TIMESTAMP_ISO8601:time} %{WORD:method} %{URIPATH:uri_requested} %{NOTSPACE:query} %{NUMBER:port} %{NOTSPACE:username} %{IPORHOST:client_ip} %{NOTSPACE:http_version} %{NOTSPACE:user_agent} %{NOTSPACE:cookie} %{URI:referrer_url} %{IPORHOST:host} %{NUMBER:http_status_code} %{NUMBER:protocol_substatus_code} %{NUMBER:win32_status} %{NUMBER:bytes_sent} %{NUMBER:bytes_received} %{NUMBER:time_taken}"
+output => 
+            {
+                "time": "2017-11-18 08:48:20",
+                "method": "GET",
+                "uri_requested": "/de",
+                "query": "adpar=12345&gclid=1234567890",
+                "port": 443,
+                "username": "-",
+                "client_ip": "149.172.138.41",
+                "http_version": "HTTP/2.0",
+                "user_agent": "Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/62.0.3202.89+Safari/537.36+OPR/49.0.2725.39",
+                "cookie": "-",
+                "referrer_url": "https://www.google.de/",
+                "host": "www.site-logfile-explorer.com",
+                "http_status_code": 301,
+                "protocol_substatus_code": 0,
+                "win32_status": 0,
+                "bytes_sent": 624,
+                "bytes_received": 543,
+                "time_taken": 46
+            }
+
+
+======================MONGODB=================================
+
+input => 2019-06-25T10:08:01.123+0000 I CONNPOOL [ShardRegistry] Dropping all pooled connections to 10.139.175.106:6113 due to InvalidOptions: Surprised to discover that 10.139.175.106:6113 does not believe it is a config server
+patten => "%{TIMESTAMP_ISO8601:timestamp}\s+%{NOTSPACE:severity}\s+%{NOTSPACE:component}\s+(?:\[%{DATA:context}\])?\s+%{GREEDYDATA:log_message}" 
+output => 
+            {
+                "timestamp": "2019-06-25T10:08:01.123+0000",
+                "severity": "I",
+                "component": "CONNPOOL",
+                "context": "ShardRegistry",
+                "log_message": "Dropping all pooled connections to 10.139.175.106:6113 due to InvalidOptions: Surprised to discover that 10.139.175.106:6113 does not believe it is a config server"
+            }
+
+======================AWS CLOUDFRONT=================================
+
+input => 2020-06-16	11:00:04	MAA50-C2	2204	2409:4073:20a:8398:c85d:cc75:6c7a:be8b	GET	dej1k5scircsp.cloudfront.net	/	200	-	Mozilla/5.0%20(X11;%20Linux%20x86_64)%20AppleWebKit/537.36%20(KHTML,%20like%20Gecko)%20Chrome/77.0.3865.75%20Safari/537.36	-	-	Miss	lp8FJFobD5B4tFMEKvYtrbIchLlG7dOoGQatPVlHYv7oc85ogxLLVg==	dej1k5scircsp.cloudfront.net	http	466	0.079	-	-	-	Miss	HTTP/1.1	-	-	57406	0.079	Miss	text/html	1774	-	-
+patten => "%{DATE:date}[ \t]%{TIME:time}[ \t]%{DATA:x_edge_location}[ \t](?:%{NUMBER:sc_bytes}|-)[ \t]%{IP:c_ip}[ \t]%{WORD:cs_method}[ \t]%{HOSTNAME:cs_host}[ \t]%{NOTSPACE:cs_uri_stem}[ \t]%{NUMBER:sc_status}[ \t]%{GREEDYDATA:referrer}[ \t]%{NOTSPACE:user_agent}[ \t]%{GREEDYDATA:cs_uri_query}[ \t]%{NOTSPACE:cookie}[ \t]%{WORD:x_edge_result_type}[ \t]%{NOTSPACE:x_edge_request_id}[ \t]%{HOSTNAME:x_host_header}[ \t]%{URIPROTO:cs_protocol}[ \t]%{INT:cs_bytes}[ \t]%{NUMBER:time_taken}[ \t]%{NOTSPACE:x_forwarded_for}[ \t]%{NOTSPACE:ssl_protocol}[ \t]%{NOTSPACE:ssl_cipher}[ \t]%{NOTSPACE:x_edge_response_result_type}[ \t]%{NOTSPACE:cs_protocol_version}[ \t]%{NOTSPACE:fle_status}[ \t]%{NOTSPACE:fle_encrypted_fields}[ \t]%{NOTSPACE:c_port}[ \t]%{NOTSPACE:time_to_first_byte}[ \t]%{NOTSPACE:x_edge_detailed_result_type}[ \t]%{NOTSPACE:sc_content_type}[ \t]%{NOTSPACE:sc_content_len}[ \t]%{NOTSPACE:sc_range_start}[ \t]%{NOTSPACE:sc_range_end}"
+output => 
+            {
+                "date": "20-06-16",
+                "time": "11:00:04",
+                "x_edge_location": "MAA50-C2",
+                "sc_bytes": 2204,
+                "c_ip": "2409:4073:20a:8398:c85d:cc75:6c7a:be8b",
+                "cs_method": "GET",
+                "cs_host": "dej1k5scircsp.cloudfront.net",
+                "cs_uri_stem": "/",
+                "sc_status": 200,
+                "referrer": "-",
+                "user_agent": "Mozilla/5.0%20(X11;%20Linux%20x86_64)%20AppleWebKit/537.36%20(KHTML,%20like%20Gecko)%20Chrome/77.0.3865.75%20Safari/537.36",
+                "cs_uri_query": "-",
+                "cookie": "-",
+                "x_edge_result_type": "Miss",
+                "x_edge_request_id": "lp8FJFobD5B4tFMEKvYtrbIchLlG7dOoGQatPVlHYv7oc85ogxLLVg==",
+                "x_host_header": "dej1k5scircsp.cloudfront.net",
+                "cs_protocol": "http",
+                "cs_bytes": 466,
+                "time_taken": 0.079,
+                "x_forwarded_for": "-",
+                "ssl_protocol": "-",
+                "ssl_cipher": "-",
+                "x_edge_response_result_type": "Miss",
+                "cs_protocol_version": "HTTP/1.1",
+                "fle_status": "-",
+                "fle_encrypted_fields": "-",
+                "c_port": 57406,
+                "time_to_first_byte": 0.079,
+                "x_edge_detailed_result_type": "Miss",
+                "sc_content_type": "text/html",
+                "sc_content_len": 1774,
+                "sc_range_start": "-",
+                "sc_range_end": "-"
+            }                        

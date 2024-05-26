@@ -1,0 +1,119 @@
+check all file  	===> ls -a
+password based access 	===> instal  ssh 
+check all used port 	===> netstat -tulpn
+kill port           	===> fuser -n tcp -k 9092
+GET read, write permission on file ===>  chmod 777 folder/file
+Start, stop services or software on ubuntu ===> systemctl [enable, start, stop, restart, status] servicename    
+												 [ngienx, tomcat, ...]
+help for aws deplyoment ===>   https://www.youtube.com/watch?v=IFdhVuQQ09k&list=PL0zysOflRCel5kT-AiGyy5oMabnlilkIS&index=48 
+================Create new User===================	
+sudo useradd -c "name" username
+sudo passwd username
+//enter password
+
+=================No passwprd based accress===================
+sudo apt-get install ssh;
+1) genrate public and private key using puttykeygen
+2) copy public key like ssh-key sjdsjbbj
+3) go server cd/.ssh 
+3) nano authe		===> paste
+
+============MYSQL==============
+apt install mysql-server
+
+create user 'username'@'%' identified by 'password'
+grant all privileges on *.* to 'username'@'%'with grant option;
+flush privileges;
+================Download Oracle Jdk ===============
+1) download Linux .tar compreded from oracle 
+2) move on server
+2) sudo tar -zxf jdk-8u251-linux-x64.tar.gz 	===> unzip
+3) mv jdk-8u.... opt/jdk 			===> rename folder
+4) sudo update-alternatives --install /usr/bin/java java /opt/jdk/bin/java 100
+5) sudo update-alternatives 			===>display java
+6) sudo update-alternatives 			===>config java
+7) sudo  nano /etc/environment
+	JAVA_HOME=/opt/jdk
+	JRE_HOME=/opt/jdk/jre
+8) sudo apt-get update
+9) java -version
+
+Mostly use Openjdk
+
+==========Use Open Jdk==================
+sudo apt-get install openjdk-11-jre openjdk-11-jdk
+sudo apt-get install openjdk-14-jre-headless    ===> server no need JDK show try to avoid
+
+==========Install Tomcat ===========
+sudo apt-get install tomcat10
+/etc/init.d/tomcat10 start    	 ===> start tomcat
+/etc/init.d/tomcat10 [status, stop, restart]    	 ===> check status
+
+==========Host servelt jsp without server===========
+chmod 777 /var/lib/tomcat/webapps
+
+=========RUN Project in background and automatical create Service================
+cd etc/systemd/system
+vim projectname.service   ==> open terminail
+
+	[Unit]
+	Description="your Description"
+	After=syslog.target
+
+	[Service]
+	User="user"
+	ExecStart=".jar path"
+	SuccessExitStatus=143
+
+	[Install]
+	WantedBy=multi-user.target
+
+	"press ESC keyboard"
+	:wq!
+
+systemctl [enable, start, stop, restart, status] projectname
+	enable ==> auto start when ubuntu start
+
+
+=============nginx================
+apt install nginx -y
+systemctl enable nginx
+cd /etc/nginx/conf.d/
+vim	"domainename.com/anyname".conf
+
+	server {
+	  listen 0.0.0.0:80;
+	  root "build path location"; 
+	  server_name "domain.com";	==> if domain avalibale
+	  location / {
+	    try_files $uri $uri/ /index.html;
+	  }
+	}
+	"PRESS ESC"
+	:wq!
+
+systemctl start nginx
+
+=========SSL===================
+Free SSL website => letsencrypt, certbot, Cloudflare
+
+========access backend with domain without port ==========
+
+cd /etc/nginx/conf.d/
+vim api."domain.com".conf
+
+	server {
+	  listen 80;
+	  server_name api."domain.com";
+	
+	  location / {
+	     proxy_pass "http://localhost:8080";
+	     proxy_set_header Host api."domain.com";
+	  }
+	}
+	"PRESS ESC"
+	:wq!
+systemctl restart nginx
+
+
+

@@ -1,0 +1,16 @@
+================Shared Folder===============
+1) create shared folder in machine and check auto-mount and parment
+2) start vm box and make sudo su
+3) create folder in media
+	mkdir media/shared
+4) mount folder 
+	mount -t vboxsf foldernameofwindow /media/shared
+	mount -t vboxsf C:/Users/Arun/Documents/Share /media/shared
+
+//if not work install apache2
+
+
+=============================================
+
+
+

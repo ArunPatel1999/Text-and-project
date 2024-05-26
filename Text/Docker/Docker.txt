@@ -1,0 +1,184 @@
+CMD change after run
+entrypoint add after your cammand
+-------------------------
+docker stop $(docker ps -aq) ===> stop all container 
+docker rm $(docker ps -aq) ===> remove all container
+docker rmi $(docker images -q)  ===> remove all image
+----------------------
+docker cp nodered:/data/flows_cred.json nodered/  ==COPY FROM Container local
+
+restart policy ===> no, always, on-failure, unless-stopped
+
+docker -v
+docker images => all images
+docker pull name:version => pull
+docker search name => search
+docker run name    => run
+docker ps  	   => run all
+docker ps -a	   => run and kill
+docker run --ev
+docker run --rm    ===> Remove container if container stop automaticly
+docker stop name:id
+
+docker history image_id ===> image command 
+
+docker top container_name ===>get all runnig process inside this container
+docker container stats  ====> get detail of how much resource is use container
+docker attach contaner_name ===> cammond is use to run container on forground 
+docker [pause, unpause] container_name ====> paush and unpause container
+docker container prune	=====> remove all non running container
+
+docker container create ubuntu sleep 60  ==> it is create only container
+docker container start container_name   ===> run the container
+
+docker container diff container_name   ====> all the changes
+
+docker rename old_name new_name
+
+docker scout cves image_name ===> scan vernablity
+
+--------------IMPORT AND EXPORT IMAGE ------------------
+IMPORT and export load image with file system it is not runn using docker command
+
+docker container export container_name > filename.tar
+docker image import filename.tar image_name
+
+docker save -o filename.tar container_name
+docker load -i filename.tar
+
+-------------------------------
+
+we can run ubunut cammend inside interractive mode bash
+---------------------RUN --------------------------------
+
+docker run --name nameOfContainer -it -d name 
+			--network network_name
+
+docker exec -it containerId/name COMMAND (get Container id and name and command to docker ps) => go inside interactive mode
+
+docker exec -it containerId/name {sh, bash, powershell, zsh } ===> get terminal access
+
+docker run -it image sh ===> run image inside container
+docker inspect id => get all details
+docker rm id => remove container
+docker rm -f $(docker container ls -a -q)  ==> delete force fully all running container
+docker rmi name => remove images
+docker rmi $(docker image ls -a -q)  ==> delete all running image
+docker restart name => restart
+docker logs name 
+docker logs name -f  ==> current log show
+
+docker run -ita name => run background
+
+docker commit container_name imageName:version ===> container to image
+
+--------VOLUME-----------
+when we use volume that time mension the permission inside file of container default is rw
+ -v "":"":{primision like | ro-> reda only : rw -> read write }
+
+docker run -itd --name container_name --volume-from another_container_name -p 8082:80 nginx
+
+docker run -itd --naem co_name --mount type=bind, source=/home/..., target=/app,readonly image_name   ==> bind type (not full mange by container)
+---------Network----------------
+type -> bridege, host, none 	
+docker network ls
+docker network create --driver=bridge --subnet=192.168.2.0/24 --gateway=192.168.2.10 test
+
+docker network connect network_name container_name  => add container in another network or multiple network
+docker network disconnect network_name container_name  => remove container from network
+
+--------Dockerhub-------------
+docker login
+docker commit
+docker push
+docker network 
+docker copy
+docker logout
+
+docker image tag nginx:latest mynginx:1.0 ===> copy image in new image
+
+
+------------Docker registry--------------------
+docker pull registry 
+docker run --name my_registry -d -p 5000:5000 registry
+
+docker tag {image_name}:{version} {registry_ip_address}:{registry_port)/{your_image_name}:{your_version} 
+==> (example)  docker tag nginx:latest 127.0.0.1:5000/nginx:latest 
+
+docker push  127.0.0.1:5000/nginx:latest
+docker pull 127.0.0.1:5000/nginx 
+http://localhost:5000/v2/_catalog ==> check all images
+
+****** By default registry not allwed another ip it accept only 127.0.0.1 for change this ***
+create file daemon.json
+{
+	"insecure-registries": ["ip_address:port_number"]
+}
+
+mv daemon.json /etc/docker/
+restart registry container
+
+if you have docker dakstor then go setting then engine setting then paset this above line
+
+------------DOCKER REST API------------
+ps -ef | grep docker
+vim /lib/systemd/system/docker.service
+EXecStart=..... fd:// -H=tcp://{Current PC IP}:{port}  ==> new
+EXecStart=..... fd:// --containerd=/run/containerd/containerd.sock  ==> old
+press ESC :wq!
+restart serivces like
+	systemctl daemon-reload
+	service docker restart
+
+//Hit in another pc get output
+DOCKER_HOST=192.168.0.109:2375 docker images ls   
+
+//=========Create Image===========
+
+create Dockerfile
+docker build -t imagename .  -> [. is path of Dockerfile] 
+	-f filename if we change the Docerfile name
+
+docker build -t imagename -f Dockerfile-dev .
+
+docker run --name imagenameOnRuntime imagename
+docker run -p 9090:9090 imagenameOnRuntime imagename
+  
+
+//===========Dockerfile============
+
+FROM 
+USER
+RUN
+ENTRYPOINT
+CMD
+ARG
+
+WORKDIR   /tmp
+COPY sourc to destinatio
+ADD it can be url copy to destincation
+ENV
+LABEL
+EXPOSE 
+
+
+-----------------------------
+docker run --name myProject -it -p 9090:9090 -d imagename
+
+
+
+//========================================
+-d, --detach                         Run container in background and print container ID      
+-e, --env list                       Set environment variables 
+--env-file list                  Read in a file of environment variables                                                                                                --expose list                    Expose a port or a range of ports  
+--health-cmd string              Command to run to check health    
+ -m, --memory bytes                   Memory limit                                                                                                                           --memory-reservation bytes       Memory soft limit  
+     --name string                    Assign a name to the container     
+-p, --publish list                   Publish a container's port(s) to the host
+-P, --publish-all                    Publish all exposed ports to random ports  
+      --rm                             Automatically remove the container when it exits  
+
+
+docker stop/kill ==> kill for kill and stop for safe stop
+docker start container ===> restart
+docker system prune  ===> remove cache , image , container

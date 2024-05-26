@@ -1,0 +1,86 @@
+ls -a  ===> all folder and file
+ls -l  ====> check permission
+netstat -tulpn  ==> host and port
+adduser username  ==> add new user
+su username ===> change user
+cat /etc/os-release  ==> os details
+lscpu ===> cpu details
+free  ===> memory
+
+touch file-name.test, cat > file-name.test ===> create file
+
+man command ===> help
+
+dmesg -T ==> get boot time message
+
+Ctrl + U ==> remove brgining to course
+Ctrl + K ===>remove course to end
+Ctrl + R ===> for search privesh execuited cammond
+
+shutdown now 
+shutdown -r min "optional message like :- reboot soon"
+----------Dir--------------
+
+rm -r dir-name ===> Delete Directer
+mkdir -p dir1/dir2/dir3   ===> create directer indiside one other
+
+
+less file-name.txt  ===> see less data of file
+
+wc file-name  ===> line in file, word count, byte size , file-name
+
+
+----------Bash file--------------
+craete .bash file
+chmod +x .bash   ==> Give the executabl access
+./.bash ==> run that bash file
+
+-----------User mangement--------------
+chown userName filename ==> change ownership of file
+
+chmod [user u/group g/other o] [add +/remove -] [read r/write w/excuite x] file
+--example----
+chmod u-w file ==> remove your write permision
+chmod u-w file ==> add your write permision
+chmod g-rwx file ==> remove rwx for over group
+chmod o-r file ==> remove read for other user 
+chomd +x file ==> add excute permisiion to all 
+chomd -x file ==> remove excute permisiion to all 
+chomd ugo+w file ==> add write permisiion to all 
+
+---------Application------------
+apt autoremove ==> remove after update
+sudo snap install app_name ===> install softwaer
+snap list  ==> snap list
+snap refresh ===> update snap
+snap remove app_name ==> remove snap
+
+sudo snap install code --classic ===> install vscode
+
+-----------find------------
+find nameoffolde -maxdepth number
+---like 
+find .===>all
+find /usr/bin
+find ~ -name "my"   ===> find all name is my
+find ~ -name "*my*" ===> find all name is like my
+find ~ -name "*my*" -maxdepth 1 ==> find all name is like my max depth 1
+
+-----------find in file------------
+grep "freedom" gpl-3.0.txt ===> find all freedom
+grep -i "freedom" gpl-3.0.txt ===> find all freedom with case insensetive
+grep "^freedom" gpl-3.0.txt ===> find all start with freedom 
+grep filename  ==> filename contain
+
+-----------Process-----------
+ps ==> get only main
+ps aux  ==> get all process
+ps aux | wc ===> count of all process
+ps aux | grep firefox ==> get all firefox running process
+kill -9 processId ==> killprocess
+
+--------Storage used----------
+df -h ==> memmory consumed
+sudo install htop 
+htop  ===> cpu detail
+

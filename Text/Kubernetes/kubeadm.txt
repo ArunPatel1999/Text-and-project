@@ -1,0 +1,20 @@
+-----------------------KUBCTL-INIT------------------------------
+
+kubeadm init --pod-network-cidr=10.244.0.0/16 --apiserver-advertise-address=<your ip address>   ==> cluster init
+kubeadm init --pod-network-cidr=10.244.0.0/16 --apiserver-advertise-address=192.168.56.2
+
+export KUBECONFIG=/etc/kubernetes/admin.conf
+kubectl apply -f https://github.com/flannel-io/flannel/releases/latest/download/kube-flannel.yml   ===> flannel is network is easy to comunicate to each other
+
+kubectl get pods --all-namespaces ==> check all serveries are run then join worker
+
+--------------------------------------------------
+
+kubeadm reset ===> Reset Cluster
+
+
+======networking=====
+if set for scratch then flannel and kaliko is good 
+if deploying in vm ware env then vmware NSX-T is good
+if you paly with k8 then weavenet 
+

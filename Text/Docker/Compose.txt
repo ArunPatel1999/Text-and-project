@@ -1,0 +1,17 @@
+
+docker-compose -p projectname up -d
+docker compose -p projectname down
+
+docker compose -p projectname -f filenamepath [up. down, create, start, stop, rm, pause, unpause, kill]
+
+docker-compose -p projectname up -d --scale service_name=runningCount+extra
+
+
+docker-compose -p projectname up --build -d
+
+*
+!target/*.jar
+!pom.xml
+
+
+docker-compose ps   ===> running container 

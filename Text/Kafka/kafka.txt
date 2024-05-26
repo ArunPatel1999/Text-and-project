@@ -1,0 +1,84 @@
+.\bin\windows\zookeeper-server-start.bat .\config\zookeeper.properties
+
+
+.\bin\windows\kafka-server-start.bat .\config\server.properties
+
+
+Crete topics
+
+.\bin\windows\kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic firstTest
+.\bin\windows\kafka-topics.bat --create --topic first_topic --bootstrap-server localhost:9092
+
+create producer
+
+.\bin\windows\kafka-console-producer.bat --broker-list localhost:9092 --topic firstTest --property "parse.key=true" --property "key.separator=:"
+
+create consumer
+
+.\bin\windows\kafka-console-consumer.bat --bootstrap-server localhost:9092 --from-beginning --topic firstTest --partition 0
+.\bin\windows\kafka-console-consumer.bat --bootstrap-server localhost:9092 \
+    --topic  stream-wordcount-output \
+    --from-beginning \
+    --property print.key=true \
+    --property print.value=true \
+    --property key.deserializer=org.apache.kafka.common.serialization.StringDeserializer \
+    --property value.deserializer=org.apache.kafka.common.serialization.LongDeserializer
+
+check partition and other
+
+.\bin\windows\kafka-topics.bat --zookeeper localhost:2181 --describe --topic faultTorent
+
+============================================New Type==========================================================
+
+--zookeeper ==> --bootstrap-server
+
+1) zookeeper server start   -   zookeeper-server-start.bat config\zookeeper.properties
+2) kafka server start       -   kafka-server-start.bat config\server.properties
+3) topic create   	    -   kafka-topics --bootstrap-server localhost:2181 --topic new-topic-1  --create --partitions 3 --replication-factor 1
+4) list of topic            - 
+  kafka-topics --zookeeper localhost:2181 --list
+  kafka-topics.bat --list --bootstrap-server localhost:9092
+
+(Delete Not Working in windows go and manualy delete topic in log file
+5) delete topic 	    -   kafka-topics --zookeeper localhost:2181 --topic new-topic-1 --delete  )
+6) descrption		    -   kafka-topics --zookeeper localhost:2181 --topic new-topic-1 --describe
+
+7) produceser		    -   kafka-console-producer --broker-list localhost:9092 --topic new-topic-1
+(acks=all is send all withoput lose data)  -  kafka-console-producer --broker-list localhost:9092 --topic new-topic-1 --producer-property acks=all
+
+8) consumer   
+from current - kafka-console-consumer --bootstrap-server localhost:9092 --topic new-topic-1
+from beginnig  - kafka-console-consumer --bootstrap-server localhost:9092 --topic new-topic-1 --from-beginning
+
+Group is use for sharing data (some data get on consumer and that data is not get other Consumer)
+
+kafka-console-consumer --bootstrap-server localhost:9092 --topic new-topic-1 --group my-first-group   
+(also use --from-beginning on end)
+
+9) Group
+
+list of groups  -  kafka-consumer-groups --bootstrap-server localhost:9092 --list
+describ		-  kafka-consumer-groups --bootstrap-server localhost:9092 --describe --group my-first-group
+
+use this cammand make data unread -   kafka-consumer-groups --bootstrap-server localhost:9092 --group my-first-group --reset-offsets --to-earliest --execute --topic new-topic-1
+
+make some data unread - kafka-consumer-groups --bootstrap-server localhost:9092 --group my-first-group --reset-offsets --shift-by -2 --execute --topic new-topic-1
+
+
+
+
+==================================================KAFKA ON SERVER==============================================================
+
+sh bin/zookeeper-server-start.sh config/zookeeper.properties &
+sh bin/kafka-server-start.sh config/server.properties
+
+sh bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic firstTest
+sh bin/kafka-topics.sh --create --topic test --bootstrap-server localhost:9092
+
+
+sudo bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic DevOps
+
+sh bin/kafka-console-producer.sh --broker-list localhost:9092 --topic firstTest --property "parse.key=true" --property "key.separator=:"
+
+
+

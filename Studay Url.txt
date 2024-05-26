@@ -1,0 +1,103 @@
+Typing Master
+Name : IcyCool
+Key : E5XQWKF-XYE3-YRCK-3PPC24K
+
+
+Elastic search
+
+microservice
+data stucher and alog
+
+Qurakes and vertex
+graalvm
+
+devops -
+Cirlcci
+ansible
+
+Reactive Programming
+
+=========================
+flatter
+===========================
+live streaming
+========================
+Elk all part
+=========================
+Blockchain
+
+Apache Nutch web search engine project.
+
+
+ROten tommato scrapping
+
+
+CReate new OS
+
+------------Docker------------------------------
+
+https://www.youtube.com/watch?v=0SS6bJczlgs
+
+https://www.youtube.com/watch?v=Ozp_tpWoscg
+
+https://www.youtube.com/watch?v=RSIstPUiEjY
+
+
+------------Kubernetes--------------------------
+https://www.youtube.com/watch?v=plZmzUumoDM&list=PLwxbO1LXPsTXH4u_GeeHoEOWITa9fZIIA&index=18
+
+https://www.youtube.com/watch?v=Fewog7_NZnQ&list=PLgoysejVfq10XsV9YfpFyE3th4bMHr1Gk
+
+https://www.youtube.com/watch?v=LjXW-K7n5fk
+
+https://www.youtube.com/watch?v=DcOztswBONg&list=PLxv9HL8TPbSwBdAB2wpz-AUPB-we8zS3W
+
+https://www.youtube.com/watch?v=xi4VLYrwFgg&list=PL6XT0grm_TfhFKUv_KI_DTVr0TCincl1r
+
+https://www.youtube.com/watch?v=X48VuDVv0do
+
+https://www.youtube.com/watch?v=Vjetwwgv36o
+
+https://www.youtube.com/watch?v=FqfoDUhzyDo
+
+https://www.youtube.com/watch?v=X48VuDVv0do&list=PLy7NrYWoggjxtN4YbSMYFFdpaxb-fR4zC
+
+https://www.youtube.com/watch?v=bhBSlnQcq2k
+
+
+-----------------REACTIVE PROGRAMMING--------------------
+
+https://www.youtube.com/watch?v=bXcFCgQsvAE&t=1692s
+
+https://www.youtube.com/watch?v=EExlnnq5Grs&list=PLqq-6Pq4lTTYPR2oH7kgElMYZhJd4vOGI
+
+https://www.youtube.com/results?search_query=spring+boot+reactor+
+
+https://www.youtube.com/watch?v=_stAxdjx8qk
+
+https://www.youtube.com/watch?v=kG2SEcl1aMM
+
+https://www.youtube.com/watch?v=zf_0ydYb3JQ
+
+https://www.youtube.com/watch?v=bXcFCgQsvAE
+
+
+-------------------YOUTUBE=======================
+
+
+https://freecoursesites.com/
+
+https://www.udemy.com/user/mumshad-mannambeth/
+
+https://www.youtube.com/@TechWorldwithNana/videos
+https://www.youtube.com/watch?v=mln3_o6qlBo
+https://www.youtube.com/@Javatechie/videos
+https://www.youtube.com/@TrainWithShubham/videos
+https://tutsnode.org/?s=Elasticsearch
+https://www.youtube.com/@techster1119/playlists
+https://www.youtube.com/watch?v=qBG5VrSPGyo&list=PLYwGWvgqiQCl-kOCxQea4N36WRm_aNJAW
+https://www.llamaindex.ai/open-source
+https://freecoursesite.com/?s=Elasticsearch
+https://freecoursesite.com/?s=elk
+https://freecourseweb.com/?s=elk
+https://gigacourse.com/?1

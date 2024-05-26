@@ -1,0 +1,25 @@
+sudo yum update ===> all update
+sudo yum --security update  ===> update only secuirty
+sudo yum update application_name  ===> update only single application
+sudo reboot    ==> reboot
+hostnamectl set-hostname master.example.com ===> sdt hostname
+hostname
+dnsdomainname
+systemctl start docker
+systemctl enable docker
+
+=====firewall setting & change===========
+// ip tabele is recomanded to use
+
+yum install -y -q iptables-services  ===> install ip tabel
+systemctl disable firewalld
+systemctl stop firewalld
+iptables -F
+service iptables save
+
+
+=======Channge root@loaclhost==============
+vi /etc/hosts
+add new line ===> ip-adddress  domainname name
+Like ==> 10.0.2.15  master.docker.com master
+reboort 

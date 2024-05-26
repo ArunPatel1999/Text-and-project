@@ -1,0 +1,61 @@
+docker info
+
+docker swarm init   ===> make node part of swarm
+docker swarm init --advertise-addr 192.168.0.106 ==> init node as master
+
+docker node ls  ==> get all node (only for master)
+
+docker swarm join-token manager  ===> create url to add new manger (only for master )  --MAX 7 master allwoad
+docker swarm join-token worker ==> get join url (only for master)
+
+docker info
+
+docker swarm leave (--force) ==> remove node from cluster 
+
+docker node rm (-f) node_id ===> remove node 
+
+docker service create --name my_first_service --replicas 3 -p 80:80 httpd
+docker service ls   ===> get all service
+docker service ps service_name ===> get service where is running 
+
+docker service scale service_name=0   ===> sacle docker swarm container
+
+docker service rm service_name
+
+docker stack deploy -c docker_compose_file.yml service_name   ==> use to deplyoe docker compose
+
+docker node update --availability [active, pause, drain--not allwaed] node_id ==> no container run on that server (docker node ls)
+
+docker service --image mysql:latest service_name ==> update image
+--------network-----------------
+--overlay network is used in swam and kubernters, 
+
+docker network create --driver=overlay first_overlay   
+docker service update --network-add network_name service_name
+
+----------volume--------------
+docker service update --volume-add location:dest service_name
+docker service update --mount-add type=volume, target=location, destiantaion=/app, readonly service_name
+
+------------Chnage Role----------------
+docker node [promote, demote] id/hostname 
+docker node update --role [manger , worker] nodename/id
+
+---------------Add label and run service accordining to label--------------
+docker node update --label-add env=dev nodename/id
+docker node update --label-rm env nodename/id
+
+docker service create --constraint="node.labels.env==dev" --replicas=2 -d nginx  ==> it will run services on where env dev is set
+
+docker service create --constraint="node.role==[manager, worker]" --replicas=2 -d nginx  ==> run services by role
+
+------Rebalncing When we add new node in swam that time swarm not going to sift ther running service so we need to force full rebalncing
+
+docker service update service --detach=false --force   ====> force rebalncing
+
+
+
+docker service create --name first_swarm --network first_overlay --replicas 4 nginx
+
+docker service create --name=viz --publish=8080:8080/tcp  --constraint=node.role==manager --mount=type=bind,src=/var/run/docker.sock,dst=/var/run/docker.sock dockersamples/visualizer    ===> visulaizer run on manger
+
