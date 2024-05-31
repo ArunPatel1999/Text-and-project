@@ -16,9 +16,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
+import java.util.List;
 
 @RestController
-@RequestMapping("/productCrud")
+@RequestMapping("/product")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class ProductCrudController {
 
@@ -54,4 +55,8 @@ public class ProductCrudController {
         return ResponseEntity.ok(productCrudService.deleteIndex());
     }
 
+    @GetMapping("/continentAndCitiesAggrgation")
+    public ResponseEntity<Object> continentAndCitiesAggrgation() throws IOException {
+        return ResponseEntity.ok(productCrudService.continentAndCitiesAggrgation());
+    }
 }
