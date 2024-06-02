@@ -4,6 +4,8 @@ Data Frame Transforms: -> http://media.sundog-soft.com/es/transforms-8.txt
 
 https://github.com/codingexplained/data-visualization-with-kibana
 
+http://media.sundog-soft.com/es/http_dashboard.ndjson ===> heartbeat dashbaord
+
 ============LOCAL CURL==============
 
 curl -k -u arunpatel -H "Content-Type:application/x-ndjson" -XPOST https://localhost:9200/_bulk --data-binary "@orders.bulk.ndjson

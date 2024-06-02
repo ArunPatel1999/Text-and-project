@@ -1,0 +1,22 @@
+- id: elasticstack-tcp-monitor
+  type: tcp
+  hosts: ["localhost"]
+  ports: [9200, 5601]
+  schedule: '@every 10s'
+
+- id: elasticstack-cluster-health
+  type: http
+  urls: ["https://localhost:9200/_cluster/health"]
+  schedule: '@every 10s'
+  check.request:
+    method: GET
+    username: arunpatel
+    password: arunpatel
+    ssl.verification_mode: none
+  check.response:
+    status: 200
+    json:
+      - description: check status
+        condition:
+          equals:
+            status: green
