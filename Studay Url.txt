@@ -1,9 +1,9 @@
-Typing Master
+https://drive.google.com/drive/folders/1ZSwXsL2P0N_h-zUu4TvHQH4uafiHP7Fj  ==> software
+
+===Typing Master====
 Name : IcyCool
 Key : E5XQWKF-XYE3-YRCK-3PPC24K
 
-
-Elastic search
 
 microservice
 data stucher and alog
@@ -21,8 +21,6 @@ Reactive Programming
 flatter
 ===========================
 live streaming
-========================
-Elk all part
 =========================
 Blockchain
 
